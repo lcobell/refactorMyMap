@@ -60,16 +60,16 @@ async function getFoursquare(business) {
 	{method: 'GET', 
 	headers: {
 	Accept: 'application/json',
-	Authorization: 'fsq3zbOFob7oU7g6gwEGPJ3LFZBT7JSEadwXsOBdi+TCMtU=ll='
+	Authorization: `fsq3GfLjfu97/4L4PL/Xti/VY+a1tK1lhjz/6fvcdTcRk88=`
 		}
 	  }
 	  let limit = 5
 	  let lat = myMap.coordinates[0]
 	  let lon = myMap.coordinates[1]
-	  let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.foursquare.com/v3/places/search?&query=coffee&limit=5&ll=41.8781%2C-87.6298`, options)
+	  let response = await fetch(`https://api.foursquare.com/v3/places/search?&query=${business}&limit=${limit}&ll=${lat}%2C${lon}`, options)
 	// I think I see how this is supposed to work, I'm getting a 503 service unavailable error, seems like a common thing from reading cors-anywhere
-	  let data = await response.text()
-	let parsedData = JSON.parse(data)
+	  let data = await response.text()  //set the data to varaiable and await the response as text
+	let parsedData = JSON.parse(data) // parsed data returned as an object
 	  let businesses = parsedData.results
 	  return businesses
 	}
